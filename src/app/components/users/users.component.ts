@@ -12,8 +12,11 @@ export class UsersComponent implements OnInit {
   constructor() { }//depends on injection...
 
   users : User[];
-  showExtended : boolean = true;
+  showExtended : boolean = false;
   loaded : boolean = false;
+  enableAdd : boolean = true;
+  currentClasses={};
+  currentStyles={};
 
   ngOnInit() {//lifesycle method. 시작되면 자동으로 시작된다. 
     //ngOnInit과 다른 점은 뭐지? 실제 초기하는 여기서 사용.
@@ -28,7 +31,9 @@ export class UsersComponent implements OnInit {
             street : 'phoang',
             city : 'MA',
             state : 'Boston!'
-          }
+          },
+          image: 'http://lorempixel.com/600/600/people/3',
+          isActive : true
         },
         {
           firstName : 'Kim',
@@ -38,7 +43,9 @@ export class UsersComponent implements OnInit {
             street : 'phoang',
             city : 'YongIn',
             state : 'Seoul'
-          }
+          },
+          image: 'http://lorempixel.com/600/600/people/1',
+          isActive : false
         },
         {
           firstName : 'So',
@@ -48,7 +55,9 @@ export class UsersComponent implements OnInit {
             street : 'USS',
             city : 'Interprise',
             state : 'Startreck?'
-          }
+          },
+          image: 'http://lorempixel.com/600/600/people/2',
+          isActive:true
         }
       ]
 
@@ -72,11 +81,28 @@ export class UsersComponent implements OnInit {
         
       // }
     });
+    this.setCurrentClasses();
+    this.setCurrentStyles();
+
     
   }
 
   addUser(user:User){
     this.users.push(user);
+  }
+
+  setCurrentClasses(){
+    this.currentClasses = {
+      'btn-success' : this.enableAdd,
+      'big-text' : this.showExtended
+    }
+  }
+
+  setCurrentStyles(){
+    this.currentStyles = {
+      'padding-top' : this.showExtended ? '0' : '100px',
+      'font-size' : this.showExtended? '' : '40px'
+    }
   }
 
 }
